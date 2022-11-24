@@ -30,7 +30,7 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email);
+                        saveUser(data.name, data.email, data.role);
                     })
                     .catch(e => console.log(e.message))
             })
@@ -51,9 +51,9 @@ const SignUp = () => {
     }
 
 
-    const saveUser = (name, email) => {
-        const user = { name, email };
-        fetch('https://doctors-portal-server-tawny-xi.vercel.app/users', {
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -89,6 +89,13 @@ const SignUp = () => {
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
                                 <input type="email" name="email" {...register("email", { required: "Email field cannot be empty!" })} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com" />
                                 {errors.email && <span className='label-text text-red-500'>{errors.email?.message}</span>}
+                            </div>
+                            <div>
+                                <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 ">User role</label>
+                                <select {...register("role")} className="select select-bordered w-full rounded-lg">
+                                    <option default>user</option>
+                                    <option>seller</option>
+                                </select>
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
