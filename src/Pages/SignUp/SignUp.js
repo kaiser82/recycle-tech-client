@@ -93,7 +93,7 @@ const SignUp = () => {
                             <div>
                                 <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 ">User role</label>
                                 <select {...register("role")} className="select select-bordered w-full rounded-lg">
-                                    <option default>user</option>
+                                    <option default>buyer</option>
                                     <option>seller</option>
                                 </select>
                             </div>
