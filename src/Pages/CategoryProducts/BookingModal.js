@@ -21,7 +21,8 @@ const BookingModal = ({ booking, setBooking }) => {
             userName: name,
             email,
             phone,
-            meetingLocation
+            meetingLocation,
+            image
 
         }
         // console.log(bookingInfo)
@@ -44,8 +45,6 @@ const BookingModal = ({ booking, setBooking }) => {
                     toast.error(data.message)
                 }
             })
-
-
     }
 
     return (
