@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import logo from '../../../assets/logo1.png'
+import toast from 'react-hot-toast';
 
 const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => { toast.success('User signed out successful.') })
             .catch(e => console.log(e))
     }
 
@@ -25,7 +27,7 @@ const NavBar = () => {
             }
         </>
     return (
-        <div className="navbar bg-violet-500 text-white lg:px-10">
+        <div className="navbar bg-violet-600 text-white lg:px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -34,6 +36,11 @@ const NavBar = () => {
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-violet-500 rounded-box w-52">
                         {menuItems}
                     </ul>
+                </div>
+                <div className="avatar">
+                    <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src={logo} alt='' />
+                    </div>
                 </div>
                 <Link to='/' className="btn btn-ghost normal-case text-xl">RecycleTech</Link>
             </div>
