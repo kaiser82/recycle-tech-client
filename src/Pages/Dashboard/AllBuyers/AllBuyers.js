@@ -19,9 +19,7 @@ const AllBuyers = () => {
                 const data = await res.json();
                 return data;
             }
-            catch {
-
-            }
+            catch { }
         }
     });
 

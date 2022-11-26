@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const ProductCard = ({ product, setBooking }) => {
-    const { productName, image, price, resalePrice, seller, yearsOfUse, time, location } = product
+    const { _id, productName, image, price, resalePrice, seller, yearsOfUse, time, location } = product;
+    const { user } = useContext(AuthContext)
+
+    const handleReportToAdmin = () => {
+        const reportItem = {
+            productId: _id,
+            productName,
+            image,
+            resalePrice,
+            seller,
+            reporter: user?.displayName,
+            reporterEmail: user?.email
+        }
+        console.log(reportItem);
+        fetch('http://localhost:5000/reports', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(reportItem)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    setBooking(null);
+                    toast.success('Item is reported to admin.')
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
+    }
     return (
         <div className="card bg-purple-50 shadow-xl">
             <figure className="px-10 pt-10 h-80">
@@ -17,9 +51,12 @@ const ProductCard = ({ product, setBooking }) => {
                     <p> <span className='font-semibold'>Time of post:</span> <span> {time}</span></p>
                     <p> <span className='font-semibold'>Seller:</span> <span> {seller}</span></p>
                 </div>
-
             </div>
-            <label onClick={() => setBooking(product)} htmlFor="booking-modal" className='btn'>Book Now </label>
+            <div className='flex justify-between pb-2 '>
+                <button className='btn btn-sm btn-accent w-1/2 '>Add to Wishlist</button>
+                <button onClick={handleReportToAdmin} className='btn btn-sm btn-error w-1/2'>Report to admin</button>
+            </div>
+            <label onClick={() => setBooking(product)} htmlFor="booking-modal" className='btn hover:bg-primary'>Book Now </label>
         </div>
     );
 };

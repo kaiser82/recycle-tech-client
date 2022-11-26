@@ -63,6 +63,7 @@ const AllSellers = () => {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>User Role</th>
+                                <th>Verify</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -73,6 +74,11 @@ const AllSellers = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td> {user?.role}</td>
+                                    <td>
+                                        {
+                                            user?.status ? <p>Verified</p> : <button className='btn btn-sm btn-info'>Undefined</button>
+                                        }
+                                    </td>
                                     <td><label onClick={() => setDeletingUser(user)} htmlFor="confirmation-modal" className='btn btn-sm btn-error'>Delete</label></td>
                                 </tr>)
                             }
