@@ -1,18 +1,39 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Loading from '../../Shared/Loading/Loading';
 
 const AddProduct = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user } = useContext(AuthContext);
-
     const navigate = useNavigate();
 
-    const handleAddProduct = (data) => {
 
+    const { data: users = [], isLoading, refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            try {
+                const res = await fetch(`http://localhost:5000/users/${user.email}`, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('recycleToken')}`
+                    }
+                });
+                const data = await res.json();
+                return data;
+            }
+            catch {
+            }
+        }
+    });
+    const verify = (users.verify)
+
+
+
+    const handleAddProduct = (data) => {
         const today = new Date();
         const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -31,7 +52,8 @@ const AddProduct = () => {
             mobile,
             seller: user.displayName,
             email: user.email,
-            time: postTime
+            time: postTime,
+            sellerStatus: verify
         }
         console.log(product)
 
@@ -48,9 +70,11 @@ const AddProduct = () => {
                 toast.success('Product added successfully.');
                 navigate('/dashboard/myproducts')
             })
+    };
+
+    if (isLoading) {
+        return <Loading />
     }
-
-
     return (
         <section className="bg-gray-100">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { MdVerifiedUser } from "react-icons/md";
 
 const ProductCard = ({ product, setBooking }) => {
-    const { _id, productName, image, price, resalePrice, seller, yearsOfUse, time, location } = product;
+    const { _id, productName, image, price, resalePrice, seller, yearsOfUse, time, location, sellerStatus } = product;
     const { user } = useContext(AuthContext)
 
     const handleReportToAdmin = () => {
@@ -49,7 +50,12 @@ const ProductCard = ({ product, setBooking }) => {
                     <p className='font-semibold'> <span>Resale Price:</span> <span className='text-green-500'> ${resalePrice}</span></p>
                     <p> <span className='font-semibold'>Years of use:</span> <span> {yearsOfUse}</span></p>
                     <p> <span className='font-semibold'>Time of post:</span> <span> {time}</span></p>
-                    <p> <span className='font-semibold'>Seller:</span> <span> {seller}</span></p>
+                    <p className='flex items-center justify-center space-x-2'>
+                        {
+                            sellerStatus && <span className='text-2xl  text-green-700'> <MdVerifiedUser /> </span>
+                        }
+                        <span className='font-semibold'>Seller:</span> <span> {seller}</span>
+                    </p>
                 </div>
             </div>
             <div className='flex justify-between pb-2 '>

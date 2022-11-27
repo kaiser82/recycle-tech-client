@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
+import { FaCheck } from 'react-icons/fa';
 
 const AllSellers = () => {
     const [deletingUser, setDeletingUser] = useState(null)
@@ -20,7 +21,6 @@ const AllSellers = () => {
                 return data;
             }
             catch {
-
             }
         }
     });
@@ -45,7 +45,25 @@ const AllSellers = () => {
                     refetch();
                 }
             })
+    };
+
+    const handleVerify = (user) => {
+        fetch(`http://localhost:5000/users/sellers/${user._id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('recycleToken')}`
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    toast.success('Seller verified successfully.');
+                    refetch();
+                }
+            })
     }
+
 
     if (isLoading) {
         return <Loading />
@@ -76,7 +94,13 @@ const AllSellers = () => {
                                     <td> {user?.role}</td>
                                     <td>
                                         {
-                                            user?.status ? <p>Verified</p> : <button className='btn btn-sm btn-info'>Undefined</button>
+                                            user?.verify === 'verified' ?
+
+                                                <p className='flex items-center space-x-2'>
+                                                    <span className='text-lg font-semibold text-green-500'><FaCheck /></span>
+                                                    <span><button className='btn btn-sm btn-disabled bg-green-600 text-white'>verified</button></span>
+                                                </p> :
+                                                <button onClick={() => handleVerify(user)} className='btn btn-sm btn-warning'>Undefined</button>
                                         }
                                     </td>
                                     <td><label onClick={() => setDeletingUser(user)} htmlFor="confirmation-modal" className='btn btn-sm btn-error'>Delete</label></td>
