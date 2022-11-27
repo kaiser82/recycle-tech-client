@@ -19,7 +19,7 @@ const Blogs = () => {
                     <div className="flex items-center mt-8 space-x-4">
                         <img src={pic} alt="" className="w-10 h-10 rounded-full " />
                         <div>
-                            <h3 className="text-sm font-medium">Leroy Jenkins</h3>
+                            <h3 className="text-sm font-medium">Black Jack</h3>
                             <time dateTime="2022-11-27" className="text-sm ">Nov 27th 2022</time>
                         </div>
                     </div>
