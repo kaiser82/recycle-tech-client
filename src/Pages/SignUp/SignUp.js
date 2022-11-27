@@ -46,6 +46,7 @@ const SignUp = () => {
             .then(res => {
                 const user = res.user;
                 console.log(user);
+                saveUser(user.displayName, user.email, 'buyer')
             })
             .catch(e => console.log(e.message))
     }

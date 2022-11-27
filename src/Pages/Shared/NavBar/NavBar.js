@@ -9,7 +9,11 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
-            .then(() => { toast.success('User signed out successful.') })
+            .then(() => {
+                localStorage.removeItem('recycleToken');
+                toast.success('User signed out successful.');
+
+            })
             .catch(e => console.log(e))
     }
 
@@ -37,7 +41,7 @@ const NavBar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <div className="avatar">
+                <div className="avatar p-1">
                     <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <img src={logo} alt='' />
                     </div>

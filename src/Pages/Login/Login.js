@@ -50,8 +50,24 @@ const Login = () => {
                 console.log(userInfo)
 
 
-                // setLoginUerEmail(user?.email)
-                toast.success("Login successful.")
+
+                fetch(`http://localhost:5000/users/${user.email}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+
+                        setLoginUerEmail(user?.email)
+                        toast.success("Login successful.")
+                    })
+                    .catch(e => console.log(e.message))
+
+
+
             })
             .catch(e => console.log(e.message))
     }
