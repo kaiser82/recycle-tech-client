@@ -41,7 +41,16 @@ const Login = () => {
             .then(res => {
                 const user = res.user;
                 console.log(user);
-                setLoginUerEmail(user?.email)
+
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    role: 'buyer'
+                }
+                console.log(userInfo)
+
+
+                // setLoginUerEmail(user?.email)
                 toast.success("Login successful.")
             })
             .catch(e => console.log(e.message))

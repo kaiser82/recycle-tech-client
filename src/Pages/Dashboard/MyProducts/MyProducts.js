@@ -27,8 +27,8 @@ const MyProducts = () => {
         setDeletingProduct(null)
     }
 
-    const handleDeleteUser = (user) => {
-        console.log(user)
+    const handleDeleteProduct = (product) => {
+        console.log(product)
         fetch(`http://localhost:5000/products/${deletingProduct._id}`, {
             method: 'DELETE',
             headers: {
@@ -41,6 +41,24 @@ const MyProducts = () => {
                     toast.success(`Product: ${deletingProduct.productName} deleted successfully`)
                     refetch();
                 }
+            })
+    };
+
+
+    const handleAdvertise = (product) => {
+        console.log(product)
+        fetch('http://localhost:5000/advertises', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success('Product added for advertise.');
+
             })
     }
 
@@ -81,7 +99,7 @@ const MyProducts = () => {
                                 <td>
                                     {
 
-                                        <button className='btn btn-sm btn-accent' >Yes</button>
+                                        <button onClick={() => handleAdvertise(product)} className='btn btn-sm btn-accent' >Yes</button>
                                     }
                                 </td>
                                 <td> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className='btn btn-sm btn-error'>Delete</label> </td>
@@ -94,7 +112,7 @@ const MyProducts = () => {
                 deletingProduct && <ConfirmationModal
                     title={`Are you sure, you want to delete: ${deletingProduct.productName}`}
                     message={`If you delete, ${deletingProduct.productName}'s information will be lost permanently.`}
-                    successAction={handleDeleteUser}
+                    successAction={handleDeleteProduct}
                     successButtonName="delete"
                     modalData={deletingProduct}
                     closeModal={closeModal}
