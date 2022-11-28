@@ -9,10 +9,10 @@ const AllSellers = () => {
     const [deletingUser, setDeletingUser] = useState(null)
 
     const { data: users = [], isLoading, refetch } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['sellers'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/users/sellers', {
+                const res = await fetch('http://localhost:5000/sellers', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('recycleToken')}`
                     }
