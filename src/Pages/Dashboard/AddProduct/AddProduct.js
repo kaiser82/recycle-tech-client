@@ -17,7 +17,7 @@ const AddProduct = () => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/users/${user.email}`, {
+                const res = await fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/users/${user.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('recycleToken')}`
                     }
@@ -57,7 +57,7 @@ const AddProduct = () => {
         }
         console.log(product)
 
-        fetch('http://localhost:5000/products', {
+        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

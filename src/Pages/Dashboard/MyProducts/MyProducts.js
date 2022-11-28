@@ -9,7 +9,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null)
 
-    const url = `http://localhost:5000/products?email=${user.email}`
+    const url = `https://used-laptop-resale-server-kaiser82.vercel.app/products?email=${user.email}`
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
@@ -29,7 +29,7 @@ const MyProducts = () => {
 
     const handleDeleteProduct = (product) => {
         console.log(product)
-        fetch(`http://localhost:5000/products/${deletingProduct._id}`, {
+        fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/products/${deletingProduct._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('recycleToken')}`
@@ -47,7 +47,7 @@ const MyProducts = () => {
 
     const handleAdvertise = (product) => {
         console.log(product)
-        fetch('http://localhost:5000/advertises', {
+        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/advertises', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
