@@ -4,6 +4,9 @@ My project name "RecycleTech" it's a online used laptop buying and selling web a
 
 live site link: https://use-laptop-resale.web.app/
 
+adminEmail: \<super@admin.com\>
+adminPassword: \<kaiser@82\>
+
 ## Features of the App
 
 In the project you can find the following features:
