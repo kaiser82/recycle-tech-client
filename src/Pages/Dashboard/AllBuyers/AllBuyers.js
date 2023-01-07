@@ -11,7 +11,7 @@ const AllBuyers = () => {
         queryKey: ['buyer'],
         queryFn: async () => {
             try {
-                const res = await fetch('https://used-laptop-resale-server-kaiser82.vercel.app/buyer', {
+                const res = await fetch('http://localhost:5000/buyer', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('recycleToken')}`
                     }
@@ -30,7 +30,7 @@ const AllBuyers = () => {
 
     const handleDeleteUser = (user) => {
         console.log(user)
-        fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/users/buyers/${user._id}`, {
+        fetch(`http://localhost:5000/users/buyers/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('recycleToken')}`

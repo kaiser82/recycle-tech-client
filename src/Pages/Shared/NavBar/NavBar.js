@@ -25,7 +25,7 @@ const NavBar = () => {
             {
                 user?.uid ? <>
                     <li> <Link to='/dashboard'>Dashboard</Link> </li>
-                    <li> <button onClick={handleLogOut}>Signout</button> </li>
+                    <li> <button onClick={handleLogOut}>Logout</button> </li>
                 </>
                     : <li> <Link to='/login'><button >Login</button></Link> </li>
             }

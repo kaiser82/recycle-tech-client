@@ -1,9 +1,10 @@
 import React from 'react';
 
 const Extra = () => {
+
     return (
         <div className='text-center py-5'>
-            <h3 className='text-4xl font-bold py-5'>What Statistics Say About Us</h3>
+            <h3 className='text-4xl font-bold py-3 bg-violet-100 mb-1'>What Statistics Say About Us</h3>
             <div className="stats stats-vertical md:stats-horizontal shadow w-full bg-violet-200 ">
 
                 <div className="stat place-items-center">

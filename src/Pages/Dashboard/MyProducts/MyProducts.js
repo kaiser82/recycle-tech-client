@@ -9,7 +9,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null)
 
-    const url = `https://used-laptop-resale-server-kaiser82.vercel.app/products?email=${user.email}`
+    const url = `http://localhost:5000/products?email=${user.email}`
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
@@ -29,7 +29,7 @@ const MyProducts = () => {
 
     const handleDeleteProduct = (product) => {
         console.log(product)
-        fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/products/${deletingProduct._id}`, {
+        fetch(`http://localhost:5000/products/${deletingProduct._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('recycleToken')}`
@@ -45,20 +45,37 @@ const MyProducts = () => {
     };
 
 
+    // const handleAdvertise = (product) => {
+    //     console.log(product)
+    //     fetch('http://localhost:5000/advertises', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(product)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             toast.success('Product added for advertise.');
+
+    //         })
+    // }
+
     const handleAdvertise = (product) => {
-        console.log(product)
-        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/advertises', {
-            method: 'POST',
+        fetch(`http://localhost:5000/products/${product._id}`, {
+            method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                authorization: `bearer ${localStorage.getItem('recycleToken')}`
             },
-            body: JSON.stringify(product)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                toast.success('Product added for advertise.');
-
+                if (data.modifiedCount > 0) {
+                    toast.success('Added for advertisement.');
+                    refetch();
+                }
             })
     }
 
@@ -94,12 +111,14 @@ const MyProducts = () => {
                                     </div>
                                 </td>
                                 <td>{product.productName}</td>
-                                <td>${product.price}</td>
+                                <td>${product.resalePrice}</td>
                                 <td> <button className='btn btn-sm btn-primary'>Available</button> </td>
                                 <td>
                                     {
-
-                                        <button onClick={() => handleAdvertise(product)} className='btn btn-sm btn-accent' >Yes</button>
+                                        product?.advertise === 'yes' ?
+                                            <button disabled className='btn btn-sm btn-accent' >Yes</button>
+                                            :
+                                            <button onClick={() => handleAdvertise(product)} className='btn btn-sm btn-accent' >Yes</button>
                                     }
                                 </td>
                                 <td> <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className='btn btn-sm btn-error'>Delete</label> </td>

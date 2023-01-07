@@ -3,9 +3,9 @@ import pic from '../../assets/blog.jpeg'
 
 const Blogs = () => {
     return (
-        <div className='space-y-10 my-5 '>
+        <div className='space-y-10 my-5 bg-gray-100'>
             <h2 className='text-4xl font-bold text-center py-5'>Blogs For Tech Lovers</h2>
-            <div className=" p-6 overflow-hidden rounded-lg shadow-lg">
+            <div className=" p-6 overflow-hidden rounded-lg shadow-lg bg-white">
                 <article>
                     <h2 className="text-xl font-bold">What are the different ways to manage a state in a React application?</h2>
                     <p className="mt-4 ">In React apps, there are at least seven ways to handle the state. <br />
@@ -25,7 +25,7 @@ const Blogs = () => {
                     </div>
                 </article>
             </div>
-            <div className=" p-6 overflow-hidden rounded-lg shadow-lg">
+            <div className=" p-6 overflow-hidden rounded-lg shadow-lg bg-white">
                 <article>
                     <h2 className="text-xl font-bold">How does prototypical inheritance work?</h2>
                     <p className="mt-4 ">Simply put, prototypical inheritance refers to the ability to access object properties from another object. We use a JavaScript prototype to add new properties and methods to an existing object constructor. We can then essentially tell our JS code to inherit properties from a prototype. Prototypical inheritance allows us to reuse the properties or methods from one JavaScript object to another through a reference pointer function.
@@ -45,7 +45,7 @@ const Blogs = () => {
                     </div>
                 </article>
             </div>
-            <div className=" p-6 overflow-hidden rounded-lg shadow-lg">
+            <div className=" p-6 overflow-hidden rounded-lg shadow-lg bg-white">
                 <article>
                     <h2 className="text-xl font-bold">What is a unit test? Why should we write unit tests?</h2>
                     <p className="mt-4 ">
@@ -72,7 +72,7 @@ const Blogs = () => {
                     </div>
                 </article>
             </div>
-            <div className=" p-6 overflow-hidden rounded-lg shadow-lg">
+            <div className=" p-6 overflow-hidden rounded-lg shadow-lg bg-white">
                 <article>
                     <h2 className="text-xl font-bold">React vs. Angular vs. Vue?</h2>
                     <p className="mt-4 ">

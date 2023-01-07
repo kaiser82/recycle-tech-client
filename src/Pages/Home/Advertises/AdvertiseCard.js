@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AdvertiseCard = ({ advertise }) => {
-    const { productName, image, location, price, resalePrice, yearsOfUse, time, seller } = advertise
+    const { productName, categoryName, image, location, price, resalePrice, yearsOfUse, time, seller } = advertise
     return (
         <div className="card bg-purple-50 shadow-xl">
-            <figure className="px-10 pt-10 h-80">
-                <img src={image} alt="Shoes" className="rounded-xl" />
+            <figure className="px-5 pt-5 ">
+                <img src={image} alt="Laptop" className="rounded-xl h-80" />
             </figure>
             <div className="card-body items-center text-center">
                 <h2 className="card-title">{productName}</h2>
@@ -17,9 +18,8 @@ const AdvertiseCard = ({ advertise }) => {
                     <p> <span className='font-semibold'>Time of post:</span> <span> {time}</span></p>
                     <p> <span className='font-semibold'>Seller:</span> <span> {seller}</span></p>
                 </div>
+                <Link to={`/category/${categoryName}`} className='btn w-full hover:bg-violet-600'>See More</Link>
             </div>
-
-            <label htmlFor="booking-modal" className='btn hover:bg-primary'>Book Now </label>
         </div>
     );
 };

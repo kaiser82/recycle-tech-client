@@ -18,7 +18,7 @@ const ProductCard = ({ product, setBooking }) => {
             reporterEmail: user?.email
         }
         console.log(reportItem);
-        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/reports', {
+        fetch('http://localhost:5000/reports', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -40,7 +40,7 @@ const ProductCard = ({ product, setBooking }) => {
     return (
         <div className="card bg-purple-50 shadow-xl">
             <figure className="px-10 pt-10 h-80">
-                <img src={image} alt="Shoes" className="rounded-xl" />
+                <img src={image} alt="Laptop" className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
                 <h2 className="card-title">{productName}</h2>
@@ -57,12 +57,13 @@ const ProductCard = ({ product, setBooking }) => {
                         <span className='font-semibold'>Seller:</span> <span> {seller}</span>
                     </p>
                 </div>
+                <div className='flex justify-between pb-2 w-full'>
+                    <button className='btn btn-sm btn-accent w-1/2 hover:text-white '>Add to Wishlist</button>
+                    <button onClick={handleReportToAdmin} className='btn btn-sm btn-error w-1/2 hover:bg-red-500 hover:text-white'>Report to admin</button>
+                </div>
+                <label onClick={() => setBooking(product)} htmlFor="booking-modal" className='btn hover:bg-violet-600 w-full'>Book Now </label>
             </div>
-            <div className='flex justify-between pb-2 '>
-                <button className='btn btn-sm btn-accent w-1/2 '>Add to Wishlist</button>
-                <button onClick={handleReportToAdmin} className='btn btn-sm btn-error w-1/2'>Report to admin</button>
-            </div>
-            <label onClick={() => setBooking(product)} htmlFor="booking-modal" className='btn hover:bg-primary'>Book Now </label>
+
         </div>
     );
 };

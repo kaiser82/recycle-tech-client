@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -11,13 +12,21 @@ const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [products, setProducts] = useState([])
+    console.log(products)
+
+    useEffect(() => {
+        fetch('http://localhost:5000/categories')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
 
 
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/users/${user.email}`, {
+                const res = await fetch(`http://localhost:5000/users/${user.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('recycleToken')}`
                     }
@@ -39,10 +48,10 @@ const AddProduct = () => {
         const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         const postTime = date + ' ' + time;
 
-        const { category_id, productName, image, price, resalePrice, yearsOfUse, location, mobile } = data
+        const { categoryName, productName, image, price, resalePrice, yearsOfUse, location, mobile } = data
 
         const product = {
-            category_id,
+            categoryName,
             productName,
             image,
             price,
@@ -53,11 +62,12 @@ const AddProduct = () => {
             seller: user.displayName,
             email: user.email,
             time: postTime,
-            sellerStatus: verify
+            sellerStatus: verify,
+            advertise: 'no'
         }
         console.log(product)
 
-        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/products', {
+        fetch('http://localhost:5000/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -76,8 +86,8 @@ const AddProduct = () => {
         return <Loading />
     }
     return (
-        <section className="bg-gray-100">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <section className="bg-gray-100 h-screen">
+            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
                 <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
@@ -114,11 +124,15 @@ const AddProduct = () => {
                                 {errors.name && <span className='label-text text-red-500'>{errors.name?.message}</span>}
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Product category ID</label>
-                                <select {...register("category_id")} className="select select-bordered w-full rounded-lg">
-                                    <option >637f2a88460053f520faaa1d</option>
+                                <label className="block mb-2 text-sm font-medium text-gray-900 ">Product category</label>
+                                <select {...register("categoryName", { required: true })} className="select select-bordered w-full rounded-lg">
+                                    {
+                                        products.map(product => <option key={product._id}>{product.categoryName
+                                        }</option>)
+                                    }
+                                    {/* <option >637f2a88460053f520faaa1d</option>
                                     <option>637f2a88460053f520faaa1e</option>
-                                    <option>637f2a88460053f520faaa1f</option>
+                                    <option>637f2a88460053f520faaa1f</option> */}
                                 </select>
                             </div>
                             <div>

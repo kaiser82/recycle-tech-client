@@ -11,7 +11,7 @@ const ReportedItems = () => {
         queryKey: ['reports'],
         queryFn: async () => {
             try {
-                const res = await fetch('https://used-laptop-resale-server-kaiser82.vercel.app/reports', {
+                const res = await fetch('http://localhost:5000/reports', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('recycleToken')}`
                     }
@@ -29,7 +29,7 @@ const ReportedItems = () => {
 
     const handleDeleteUser = (report) => {
         console.log(report)
-        fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/reports/${report._id}`, {
+        fetch(`http://localhost:5000/reports/${report._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('recycleToken')}`

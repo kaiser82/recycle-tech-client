@@ -54,7 +54,7 @@ const SignUp = () => {
 
     const saveUser = (name, email, role) => {
         const user = { name, email, role };
-        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -69,8 +69,8 @@ const SignUp = () => {
     }
 
     return (
-        <section className="bg-gray-100">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <section className="bg-gray-100 min-h-screen py-5 ">
+            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
                 <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
