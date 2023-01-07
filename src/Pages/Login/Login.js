@@ -51,7 +51,7 @@ const Login = () => {
 
 
 
-                fetch(`http://localhost:5000/users/${user.email}`, {
+                fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/users/${user.email}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'

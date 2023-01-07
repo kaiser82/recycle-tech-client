@@ -13,7 +13,7 @@ const CategoryProducts = () => {
     const { id } = useParams();
     console.log(id);
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`https://used-laptop-resale-server-kaiser82.vercel.app/products/${id}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [id])

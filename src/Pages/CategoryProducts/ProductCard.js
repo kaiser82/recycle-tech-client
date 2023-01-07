@@ -18,7 +18,7 @@ const ProductCard = ({ product, setBooking }) => {
             reporterEmail: user?.email
         }
         console.log(reportItem);
-        fetch('http://localhost:5000/reports', {
+        fetch('https://used-laptop-resale-server-kaiser82.vercel.app/reports', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

@@ -4,7 +4,7 @@ import AdvertiseCard from './AdvertiseCard';
 
 const Advertises = () => {
 
-    const url = 'http://localhost:5000/advertises';
+    const url = 'https://used-laptop-resale-server-kaiser82.vercel.app/advertises';
 
     const { data: advertises = [] } = useQuery({
         queryKey: ['advertises'],
